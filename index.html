@@ -2222,21 +2222,22 @@ function renderCalendar() {
 
 // ── HISTÓRICO / STATS ──
 function renderHistorico(historico) {
+  var elP=document.getElementById('stat-presencas');
+  var elF=document.getElementById('stat-faltas');
+  var elFreq=document.getElementById('stat-freq');
   if(!historico||!historico.length){
-    document.getElementById('stat-presencas').textContent='0';
-    document.getElementById('stat-faltas').textContent='0';
-    document.getElementById('stat-freq').textContent='—';
+    if(elP) elP.textContent='0';
+    if(elF) elF.textContent='0';
+    if(elFreq) elFreq.textContent='—';
     initCalendar([], window._calFreq||null); return;
   }
   var presencas=historico.filter(function(h){return h.status==='presente';}).length;
   var faltas=historico.filter(function(h){return h.status==='falta';}).length;
   var total=presencas+faltas;
   var freq=total>0?Math.round((presencas/total)*100)+'%':'—';
-  var elP=document.getElementById('stat-presencas');
-  var elF=document.getElementById('stat-faltas');
-  elP.textContent='0'; elF.textContent='0';
-  setTimeout(function(){ animateCounter(elP,presencas); animateCounter(elF,faltas); }, 400);
-  document.getElementById('stat-freq').textContent=freq;
+  if(elP){ elP.textContent='0'; setTimeout(function(){ animateCounter(elP,presencas); }, 400); }
+  if(elF){ elF.textContent='0'; setTimeout(function(){ animateCounter(elF,faltas); }, 400); }
+  if(elFreq) elFreq.textContent=freq;
   initCalendar(historico, window._calFreq||null);
 }
 
