@@ -909,6 +909,95 @@ footer {
   .dash-section { padding: 40px 24px !important; }
 }
 
+
+/* ════════════════════════════════════════
+   STUDENT PROFILE CARD
+════════════════════════════════════════ */
+.student-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--lbg-card);
+  border: 1px solid var(--lborder);
+  border-radius: 8px;
+  padding: 20px 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(22,33,58,0.06), 0 4px 16px rgba(22,33,58,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.student-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-light));
+  border-radius: 8px 0 0 8px;
+}
+.student-avatar {
+  width: 52px; height: 52px; flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg-mid), var(--bg-light));
+  border: 2px solid var(--lborder-accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 22px; font-weight: 400;
+  color: var(--primary);
+  background-size: cover; background-position: center;
+  overflow: hidden;
+}
+.student-info {
+  flex: 1; min-width: 0;
+}
+.student-name {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 500;
+  color: var(--ltxt); line-height: 1.1;
+  margin-bottom: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.student-course {
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--primary);
+  margin-bottom: 8px;
+}
+.student-meta { display: flex; align-items: center; gap: 12px; }
+.student-badge {
+  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
+  background: rgba(61,153,112,0.10); color: var(--success);
+  border: 1px solid rgba(61,153,112,0.20);
+}
+.student-badge.inactive {
+  background: rgba(120,120,120,0.08); color: var(--lmuted);
+  border-color: rgba(120,120,120,0.15);
+}
+.student-since {
+  font-size: 10px; color: var(--lmuted); letter-spacing: .5px;
+}
+.student-divider {
+  width: 1px; height: 48px; flex-shrink: 0;
+  background: var(--lborder);
+  margin: 0 8px;
+}
+.student-stats {
+  display: flex; gap: 28px;
+}
+.student-stat { text-align: center; }
+.student-stat-val {
+  font-family: var(--font-serif); font-size: 26px; font-weight: 400;
+  color: var(--ltxt); line-height: 1;
+  margin-bottom: 3px;
+}
+.student-stat-lbl {
+  font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--lmuted);
+}
+
+@media(max-width:700px){
+  .student-card { flex-wrap: wrap; }
+  .student-divider { display: none; }
+  .student-stats { width: 100%; justify-content: space-around; }
+}
+
 </style>
 </head>
 <body>
@@ -1025,6 +1114,34 @@ footer {
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="section dash-section">
+
+  <!-- Student profile card -->
+  <div class="student-card" id="studentCard" data-reveal>
+    <div class="student-avatar" id="studentAvatar"></div>
+    <div class="student-info">
+      <div class="student-name" id="studentName">—</div>
+      <div class="student-course" id="studentCourse">—</div>
+      <div class="student-meta">
+        <span class="student-badge" id="studentStatus">Ativo</span>
+        <span class="student-since" id="studentSince"></span>
+      </div>
+    </div>
+    <div class="student-divider"></div>
+    <div class="student-stats">
+      <div class="student-stat">
+        <div class="student-stat-val" id="std-total">0</div>
+        <div class="student-stat-lbl">Total de aulas</div>
+      </div>
+      <div class="student-stat">
+        <div class="student-stat-val" id="std-done">0</div>
+        <div class="student-stat-lbl">Concluídas</div>
+      </div>
+      <div class="student-stat">
+        <div class="student-stat-val" id="std-next">—</div>
+        <div class="student-stat-lbl">Próxima aula</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Row 1: KPI micro-cards -->
   <div class="dash-kpi-row" data-reveal>
@@ -1370,6 +1487,14 @@ const DEMO = {
     { tag:'Vocabulary',  titulo:'Japanese Loanwords in English Culinary Writing', nivel:'C1 — Advanced' },
     { tag:'Reading',     titulo:'Michelin Guide: Japanese Restaurant Reviews', nivel:'C1 — Advanced' },
   ],
+  aluno: [
+    { chave:'nome',         valor:'Dr. João Silva' },
+    { chave:'titulo',       valor:'Dr.' },
+    { chave:'curso',        valor:'Business English' },
+    { chave:'inicio',       valor:'15/01/2025' },
+    { chave:'status',       valor:'ativo' },
+    { chave:'foto',         valor:'' },
+  ],
   infograficos: [
     { nome:'Japanese Ingredient Glossary', sub:'250 essential terms', label:'IG' },
     { nome:'Cooking Verbs Chart',          sub:'Chop, slice, mince and more', label:'CV' },
@@ -1463,6 +1588,61 @@ function applyCfg(rows) {
 }
 
 /* ══════════════════════════════════════════
+   ALUNO
+══════════════════════════════════════════ */
+let alunoData = {};
+
+function buildAluno(rows) {
+  const a = {};
+  (rows || []).forEach(r => { a[r.chave] = r.valor; });
+  alunoData = a;
+
+  const nome    = a.nome    || 'Aluno';
+  const titulo  = a.titulo  || '';
+  const curso   = a.curso   || '';
+  const inicio  = a.inicio  || '';
+  const status  = (a.status || 'ativo').toLowerCase();
+  const foto    = a.foto    || '';
+
+  // Avatar: photo or initials
+  const avatarEl = document.getElementById('studentAvatar');
+  if (foto) {
+    avatarEl.style.backgroundImage = `url(${foto})`;
+    avatarEl.style.backgroundSize  = 'cover';
+  } else {
+    const initials = nome.split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase();
+    avatarEl.textContent = initials;
+    avatarEl.style.background = 'linear-gradient(135deg, var(--bg-mid), var(--bg-light))';
+  }
+
+  // Texts
+  document.getElementById('studentName').textContent   = titulo ? `${titulo} ${nome}` : nome;
+  document.getElementById('studentCourse').textContent = curso;
+  document.getElementById('studentSince').textContent  = inicio ? `Matrícula: ${inicio}` : '';
+
+  const badge = document.getElementById('studentStatus');
+  badge.textContent = status === 'ativo' ? 'Ativo' : 'Inativo';
+  badge.className   = 'student-badge' + (status !== 'ativo' ? ' inactive' : '');
+
+  // Personalise greeting
+  const primeiroNome = nome.split(' ')[0];
+  window._alunoNome = primeiroNome;
+  window._alunoTitulo = titulo;
+}
+
+function updateStudentStats() {
+  const done  = document.querySelectorAll('.module-card.completed').length;
+  const total = modulosData.length;
+  document.getElementById('std-total').textContent = total;
+  document.getElementById('std-done').textContent  = done;
+  // next uncompleted lesson
+  const next = modulosData.find((m, i) => !document.getElementById(`mod-${i}`)?.classList.contains('completed'));
+  const nextEl = document.getElementById('std-next');
+  if (next) nextEl.textContent = next.numero || 'L' + (modulosData.indexOf(next)+1);
+  else nextEl.textContent = done ? 'Concluído' : '—';
+}
+
+/* ══════════════════════════════════════════
    MÓDULOS
 ══════════════════════════════════════════ */
 let modulosData = [];
@@ -1530,9 +1710,9 @@ function updateStats() {
   const pct   = Math.round(done / total * 100);
   document.getElementById('stat-lessons').textContent = done;
   document.getElementById('stat-pct').textContent = pct + '%';
-  // animate ring (circumference = 2π×18 ≈ 113)
   const circle = document.getElementById('ring-circle');
   if (circle) circle.style.strokeDashoffset = 113 - (113 * pct / 100);
+  updateStudentStats();
 }
 
 function downloadPDF(url, title) {
@@ -1599,6 +1779,7 @@ async function bootstrap() {
 
   const applyAll = (data) => {
     cfg = applyCfg(data.config);
+    buildAluno(data.aluno || []);
     buildModules(data.modulos);
     buildFinanceiro(data.financeiro, data.pagamentos);
     buildAcervo(data.acervo);
@@ -1617,12 +1798,13 @@ async function bootstrap() {
         fetchCSV('config'), fetchCSV('modulos')
       ]);
       // optional tabs
+      const alu  = await fetchCSV('aluno').catch(() => DEMO.aluno);
       const fin  = await fetchCSV('financeiro').catch(() => DEMO.financeiro);
       const pag  = await fetchCSV('pagamentos').catch(() => DEMO.pagamentos);
       const acv  = await fetchCSV('acervo').catch(() => DEMO.acervo);
       const info = await fetchCSV('infograficos').catch(() => DEMO.infograficos);
 
-      applyAll({ config: configRows, modulos: modulosRows, financeiro: fin, pagamentos: pag, acervo: acv, infograficos: info });
+      applyAll({ config: configRows, modulos: modulosRows, aluno: alu, financeiro: fin, pagamentos: pag, acervo: acv, infograficos: info });
       banner.classList.add('hidden');
     } catch (err) {
       console.warn('Sheets error:', err);
@@ -1677,7 +1859,12 @@ function startClock() {
     document.getElementById('topbar-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
     const hr = now.getHours();
     const salut = hr < 12 ? 'Bom dia' : hr < 18 ? 'Boa tarde' : 'Boa noite';
-    document.getElementById('topbar-greeting').innerHTML = `${salut}, <em>bem-vindo</em>`;
+    const nomeTopo = window._alunoTitulo
+      ? `<em>${window._alunoTitulo} ${window._alunoNome || ''}</em>`
+      : window._alunoNome
+        ? `<em>${window._alunoNome}</em>`
+        : '<em>bem-vindo</em>';
+    document.getElementById('topbar-greeting').innerHTML = `${salut}, ${nomeTopo}`;
   }
   tick(); setInterval(tick, 1000);
 }
