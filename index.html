@@ -1320,7 +1320,7 @@ body{font-family:var(--sans);background:var(--off-white);color:var(--text-body);
 
         </nav>
         <p class="brand-label">Instituto MD Talk</p>
-        <h1 class="brand-title">Seu Portal de <em>Medical English</em></h1>
+        <h1 class="brand-title"><span id="hero-greeting">Bom dia,</span> <em id="hero-nome"></em></h1>
       </div>
       <div class="header-right">
         <p class="header-greeting" id="hdr-greeting">Good morning,</p>
@@ -1993,6 +1993,8 @@ function renderDashboard(a, avisos) {
   }
 
   document.getElementById('hdr-nome').textContent = a.nome_display || a.login;
+  var heroNome = document.getElementById('hero-nome');
+  if (heroNome) heroNome.textContent = a.nome_display || a.login;
 
   var ld = document.getElementById('link-drive');
   if (ld) { if (a.link_drive) { ld.href = a.link_drive; } else { ld.classList.add('disabled'); } }
@@ -2102,7 +2104,10 @@ function updateClock() {
   var m = String(now.getMinutes()).padStart(2,'0');
   var s = String(now.getSeconds()).padStart(2,'0');
   var g = h>=5&&h<12?'Good morning,':h>=12&&h<18?'Good afternoon,':'Good evening,';
+  var gPT = h>=5&&h<12?'Bom dia,':h>=12&&h<18?'Boa tarde,':'Boa noite,';
   var grEl = document.getElementById('hdr-greeting');
+  var heroGr = document.getElementById('hero-greeting');
+  if (heroGr) heroGr.textContent = gPT;
   var clEl = document.getElementById('hdr-clock');
   if (grEl) grEl.textContent = g;
   if (clEl) clEl.textContent = String(h).padStart(2,'0')+':'+m+':'+s;
