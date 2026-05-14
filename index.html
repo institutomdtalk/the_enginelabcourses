@@ -2074,6 +2074,19 @@ function renderDashboard(a, avisos) {
 
 // ── RELÓGIO ──
 var clockInterval = null;
+function initOrbital() {
+  var h1 = document.querySelector('.brand-title');
+  var svg = document.getElementById('orbital-svg');
+  if (!h1 || !svg) return;
+  var w = h1.offsetWidth;
+  var h = h1.offsetHeight;
+  svg.setAttribute('width', w + 80);
+  svg.setAttribute('height', h + 40);
+  var p1 = document.getElementById('orb-path-1');
+  var p2 = document.getElementById('orb-path-2');
+  if (p1) { p1.setAttribute('rx', Math.round(w/2 + 20)); p1.setAttribute('ry', Math.round(h/2 + 6)); }
+  if (p2) { p2.setAttribute('rx', Math.round(w/2 + 36)); p2.setAttribute('ry', Math.round(h/2 + 2)); }
+}
 function startClock() { updateClock(); clockInterval = setInterval(updateClock, 1000); }
 function stopClock()  { if (clockInterval) { clearInterval(clockInterval); clockInterval = null; } }
 function updateClock() {
