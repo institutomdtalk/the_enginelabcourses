@@ -1320,7 +1320,23 @@ body{font-family:var(--sans);background:var(--off-white);color:var(--text-body);
 
         </nav>
         <p class="brand-label">Instituto MD Talk</p>
-        <h1 class="brand-title"><span id="hero-greeting">Bom dia,</span> <em id="hero-nome"></em></h1>
+        <div style="position:relative;display:inline-block">
+          <h1 class="brand-title"><span id="hero-greeting">Bom dia,</span> <em id="hero-nome"></em></h1>
+          <svg id="orbital-svg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;overflow:visible" width="0" height="0">
+            <ellipse id="orb-path-1" cx="0" cy="0" rx="120" ry="18" fill="none"/>
+            <ellipse id="orb-path-2" cx="0" cy="0" rx="160" ry="14" fill="none" transform="rotate(30)"/>
+            <circle r="3.5" fill="#C4A45A" opacity="0.9">
+              <animateMotion dur="4s" repeatCount="indefinite">
+                <mpath href="#orb-path-1"/>
+              </animateMotion>
+            </circle>
+            <circle r="2.5" fill="#E8D9B0" opacity="0.6">
+              <animateMotion dur="6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                <mpath href="#orb-path-2"/>
+              </animateMotion>
+            </circle>
+          </svg>
+        </div>
       </div>
       <div class="header-right">
         <p class="header-clock" id="hdr-clock" style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;color:var(--white);letter-spacing:2px;line-height:1;margin-bottom:8px"></p>
@@ -1336,42 +1352,6 @@ body{font-family:var(--sans);background:var(--off-white);color:var(--text-body);
       </div>
     </div>
 
-    <!-- PRESENÇA NO HERO -->
-    <div style="position:relative;z-index:1;border-top:1px solid rgba(196,164,90,0.12)">
-      <div style="max-width:1100px;margin:0 auto;padding:28px 36px 36px;display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap">
-        <div class="presenca-left">
-          <p class="presenca-label"><span class="pulse-dot"></span> Suas aulas estão agendadas para o horário abaixo</p>
-          <div class="proxima-aula-box">
-            <p class="proxima-aula-data" id="proxima-aula-txt"><span class="proxima-aula-vazia">Não informada</span></p>
-          </div>
-
-        </div>
-
-        <!-- ── BOTÕES DE PRESENÇA ── -->
-        <div class="presenca-right">
-          <div style="display:none"><span id="stat-presencas"></span><span id="stat-faltas"></span><span id="stat-freq"></span></div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <!-- linha com os dois botões lado a lado -->
-            <div style="display:flex;gap:8px">
-              <button class="btn-confirmar" id="btn-presente">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Confirmar Presença
-              </button>
-              <button class="btn-confirmar" id="btn-falta" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.12)">
-                Registrar Falta
-              </button>
-            </div>
-            <!-- botão Meet abaixo, largura total -->
-            <a class="btn-meet" id="btn-meet" href="#" target="_blank" rel="noopener" style="display:none">
-              <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-              Entrar no Google Meet
-            </a>
-          </div>
-        </div>
-        <!-- ── /BOTÕES DE PRESENÇA ── -->
-
-      </div>
-    </div>
     <div class="header-gold-line"></div>
   </header>
 
@@ -2089,7 +2069,7 @@ function renderDashboard(a, avisos) {
   }
   showPage('dashboard');
   startClock();
-  setTimeout(function(){ initReveal(); animateCards(); }, 80);
+  setTimeout(function(){ initReveal(); animateCards(); initOrbital(); }, 80);
 }
 
 // ── RELÓGIO ──
