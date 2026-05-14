@@ -998,6 +998,333 @@ footer {
   .student-stats { width: 100%; justify-content: space-around; }
 }
 
+
+/* ════════════════════════════════════════════════════════════
+   UI/UX REFINEMENT LAYER
+════════════════════════════════════════════════════════════ */
+
+/* ── 1. Global typography & spacing ── */
+html { font-size: 15px; }
+body { line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* Scrollbar refined */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--lbg) !important; }
+::-webkit-scrollbar-thumb { background: var(--lborder-accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ── 2. Topbar — more structured ── */
+#topbar {
+  height: 60px !important;
+  padding: 0 40px 0 80px !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto auto !important;
+  align-items: center !important;
+  gap: 32px !important;
+}
+#topbar-greeting {
+  font-size: 14px !important;
+  margin: 0 !important;
+  letter-spacing: .3px;
+}
+.topbar-clock { font-size: 17px !important; }
+.topbar-date  { font-size: 9px !important; text-align: right; }
+
+/* ── 3. Side nav — tighter, more editorial ── */
+.nav-brand { padding: 0 24px 24px !important; }
+.nav-brand .overline { font-size: 8px !important; letter-spacing: 4px !important; }
+.nav-brand h2 { font-size: 18px !important; }
+.nav-section-label { padding: 18px 24px 6px !important; font-size: 7.5px !important; letter-spacing: 3.5px !important; opacity: .7; }
+.nav-link { padding: 10px 24px !important; font-size: 10.5px !important; letter-spacing: .5px !important; border-radius: 0 !important; }
+.nav-link:hover { padding-left: 30px !important; }
+
+/* ── 4. Hero — content refinement ── */
+.hero-content { padding: 0 80px 0 100px !important; max-width: 680px !important; }
+.hero-overline { font-size: 8.5px !important; letter-spacing: 6px !important; margin-bottom: 20px !important; }
+#hero-title { font-size: clamp(46px, 5.2vw, 76px) !important; letter-spacing: -1px; }
+#hero-desc { font-size: 13px !important; line-height: 2 !important; color: rgba(255,255,255,.5) !important; }
+
+/* ── 5. Section layout — breathing room ── */
+.section { padding: 72px 80px 72px 80px !important; }
+.section-header { margin-bottom: 40px !important; }
+.section-overline { font-size: 8.5px !important; letter-spacing: 4px !important; margin-bottom: 8px !important; }
+.section-title { font-size: clamp(24px, 3.5vw, 38px) !important; letter-spacing: -.5px; }
+.section-title::after { bottom: -8px !important; width: 32px !important; }
+
+/* ── 6. Student card — refined ── */
+.student-card {
+  padding: 18px 28px !important;
+  border-radius: 10px !important;
+  border-width: 1px !important;
+  transition: var(--tr);
+}
+.student-name { font-size: 20px !important; }
+.student-course { font-size: 9px !important; letter-spacing: 2.5px !important; margin-bottom: 6px !important; }
+.student-badge { font-size: 7.5px !important; border-radius: 20px !important; padding: 3px 10px !important; }
+.student-stat-val { font-size: 22px !important; }
+.student-stat-lbl { font-size: 7.5px !important; }
+
+/* ── 7. KPI cards — more refined ── */
+.dash-kpi-row { gap: 10px !important; margin-bottom: 14px !important; }
+.kpi-card {
+  padding: 14px 16px !important;
+  border-radius: 8px !important;
+  gap: 12px !important;
+}
+.kpi-icon { width: 30px !important; height: 30px !important; border-radius: 8px !important; }
+.kpi-icon svg { width: 13px !important; height: 13px !important; }
+.kpi-value { font-size: 22px !important; }
+.kpi-label { font-size: 8px !important; }
+
+/* ── 8. Dash panels ── */
+.dash-main-row { gap: 14px !important; }
+.dash-panel { border-radius: 10px !important; padding: 20px 22px !important; }
+.dash-panel-label { font-size: 8px !important; letter-spacing: 3px !important; margin-bottom: 16px !important; padding-bottom: 8px !important; }
+
+/* ── 9. Module cards — richer look ── */
+.modules-grid { gap: 16px !important; }
+.module-card {
+  border-radius: 10px !important;
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease !important;
+}
+.module-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 32px rgba(22,33,58,0.10), 0 2px 8px rgba(184,154,90,0.08) !important;
+  border-color: var(--lborder-accent) !important;
+}
+.module-number {
+  padding: 18px 20px 0 !important;
+  font-size: 7.5px !important;
+  letter-spacing: 2.5px !important;
+}
+.module-title {
+  padding: 7px 20px 4px !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+}
+.module-desc {
+  padding: 0 20px 12px !important;
+  font-size: 11.5px !important;
+  line-height: 1.65 !important;
+}
+.module-meta {
+  padding: 10px 20px !important;
+  background: rgba(22,33,58,0.025) !important;
+}
+.module-duration { font-size: 8.5px !important; letter-spacing: 1px !important; }
+.btn-icon { width: 28px !important; height: 28px !important; border-radius: 7px !important; }
+
+/* completed modules subtle tint */
+.module-card.completed .module-title::before {
+  content: '';
+}
+
+/* ── 10. Search bar ── */
+.search-bar input {
+  border-radius: 8px !important;
+  padding: 12px 44px 12px 18px !important;
+  font-size: 13px !important;
+  border-width: 1px !important;
+  transition: border-color .25s ease, box-shadow .25s ease !important;
+}
+.search-bar input:focus {
+  box-shadow: 0 0 0 3px rgba(184,154,90,0.08) !important;
+}
+
+/* ── 11. Translator ── */
+.translator-panel { border-radius: 10px !important; }
+.translator-panel-header { padding: 14px 18px !important; }
+.translator-panel textarea { padding: 16px 18px !important; font-size: 13.5px !important; min-height: 140px !important; }
+.btn-translate {
+  border-radius: 6px !important;
+  padding: 12px !important;
+  font-size: 8.5px !important;
+  letter-spacing: 2.5px !important;
+  margin-top: 8px !important;
+  transition: background .25s ease, opacity .25s ease !important;
+}
+.btn-translate:hover { opacity: 1 !important; background: var(--primary-light) !important; }
+.translator-swap { border-radius: 50% !important; transition: background .25s ease, transform .3s ease !important; }
+.translator-swap:hover { transform: rotate(180deg) !important; }
+
+/* ── 12. Flashcards ── */
+.flashcard { border-radius: 10px !important; }
+.flashcard-face .card-text { font-size: 19px !important; line-height: 1.5 !important; }
+.fc-btn {
+  border-radius: 6px !important;
+  padding: 7px 18px !important;
+  font-size: 8.5px !important;
+  transition: background .2s, border-color .2s, color .2s !important;
+}
+.btn-primary {
+  border-radius: 6px !important;
+  padding: 11px 24px !important;
+  font-size: 8.5px !important;
+  letter-spacing: 2.5px !important;
+  transition: background .25s ease, transform .2s ease !important;
+}
+.btn-primary:hover { transform: translateY(-1px) !important; opacity: 1 !important; background: var(--primary-light) !important; }
+.saved-note-item { border-radius: 7px !important; }
+
+/* ── 13. IPA cards ── */
+.ipa-grid { grid-template-columns: repeat(auto-fill,minmax(105px,1fr)) !important; gap: 8px !important; }
+.ipa-card { border-radius: 8px !important; padding: 14px 10px !important; transition: background .2s, border-color .2s, transform .2s !important; }
+.ipa-card:hover { transform: translateY(-2px) !important; }
+.ipa-symbol { font-size: 24px !important; }
+.ipa-name { font-size: 7.5px !important; }
+
+/* ── 14. Verbs table ── */
+.verbs-table th { font-size: 8px !important; letter-spacing: 2.5px !important; padding: 10px 14px !important; }
+.verbs-table td { font-size: 13px !important; padding: 10px 14px !important; }
+.filter-btn { border-radius: 5px !important; font-size: 8px !important; padding: 5px 12px !important; transition: background .2s, border-color .2s, color .2s !important; }
+
+/* ── 15. Archive cards ── */
+.archive-grid { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)) !important; gap: 14px !important; }
+.archive-card {
+  border-radius: 10px !important;
+  padding: 24px !important;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease !important;
+}
+.archive-card:hover { transform: translateY(-4px) !important; box-shadow: 0 8px 28px rgba(22,33,58,0.09) !important; }
+.archive-tag { font-size: 7.5px !important; letter-spacing: 2.5px !important; margin-bottom: 9px !important; }
+.archive-title { font-size: 16px !important; line-height: 1.3 !important; }
+.archive-level { font-size: 9.5px !important; }
+
+/* ── 16. Infographic cards ── */
+.infographics-grid { grid-template-columns: repeat(auto-fill,minmax(180px,1fr)) !important; gap: 12px !important; }
+.infographic-card { border-radius: 10px !important; overflow: hidden !important; }
+.infographic-thumb { height: 120px !important; }
+.infographic-info { padding: 14px 16px !important; }
+.infographic-name { font-size: 12px !important; font-weight: 500 !important; }
+.infographic-sub { font-size: 10px !important; margin-top: 3px !important; }
+
+/* ── 17. Finance ── */
+.finance-grid { gap: 14px !important; margin-bottom: 28px !important; }
+.finance-card { border-radius: 10px !important; padding: 24px 20px !important; }
+.finance-amount { font-size: 30px !important; }
+.finance-label { font-size: 8.5px !important; }
+.payments-table th { font-size: 7.5px !important; padding: 10px 16px !important; }
+.payments-table td { padding: 12px 16px !important; font-size: 12.5px !important; }
+.status-badge { border-radius: 4px !important; font-size: 7.5px !important; padding: 3px 9px !important; }
+
+/* ── 18. Contact ── */
+.contact-grid { gap: 60px !important; }
+.contact-info-item { gap: 16px !important; margin-bottom: 24px !important; }
+.contact-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; }
+.contact-detail-label { font-size: 7.5px !important; letter-spacing: 2.5px !important; }
+.contact-detail-value { font-size: 13px !important; }
+.contact-form-field input, .contact-form-field textarea {
+  border-radius: 7px !important;
+  padding: 12px 14px !important;
+  font-size: 13px !important;
+  transition: border-color .2s, box-shadow .2s !important;
+}
+.contact-form-field input:focus, .contact-form-field textarea:focus {
+  box-shadow: 0 0 0 3px rgba(184,154,90,0.08) !important;
+}
+
+/* ── 19. Footer ── */
+footer { padding: 36px 80px !important; }
+.footer-brand { font-size: 17px !important; letter-spacing: 1px !important; }
+.footer-copy { font-size: 8.5px !important; letter-spacing: 1.5px !important; }
+
+/* ── 20. Modal ── */
+.modal { border-radius: 12px !important; padding: 40px !important; }
+.modal-title { font-size: 24px !important; }
+.modal-close { border-radius: 50% !important; }
+
+/* ── 21. Contract box ── */
+#contract [style*="background"] {
+  border-radius: 10px !important;
+  padding: 32px !important;
+}
+
+/* ── 22. Progress bars ── */
+.progress-item { margin-bottom: 16px !important; }
+.progress-bar { height: 4px !important; border-radius: 4px !important; }
+.progress-fill { border-radius: 4px !important; }
+.progress-name { font-size: 11px !important; }
+.progress-pct { font-size: 13px !important; }
+
+/* ── 23. Heatmap ── */
+.heatmap-cell { border-radius: 3px !important; }
+
+/* ── 24. Config banner ── */
+#config-banner { border-radius: 0 !important; padding: 14px 32px !important; }
+
+/* ── 25. Reveal animation — smoother ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94) !important;
+}
+[data-reveal].visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+/* ── 26. Sections — alternate bg with subtle shift ── */
+#modules       { background: var(--lbg-card) !important; }
+#search-section{ background: var(--lbg-alt) !important; }
+#translator    { background: var(--lbg-card) !important; }
+#flashcards    { background: var(--lbg-alt) !important; }
+#phonetics     { background: var(--lbg-card) !important; }
+#irregular-verbs { background: var(--lbg-alt) !important; }
+#archive       { background: var(--lbg-card) !important; }
+#infographics  { background: var(--lbg-alt) !important; }
+#financial     { background: var(--lbg-card) !important; }
+#contract      { background: var(--lbg-alt) !important; }
+#contact       { background: var(--lbg-card) !important; }
+#dashboard     { background: var(--lbg) !important; }
+
+/* ── 27. Section dividers — thinner, softer ── */
+.section { border-bottom: 1px solid var(--lborder) !important; }
+
+/* ── 28. Link-style nav items in sections ── */
+.more-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--primary); text-decoration: none;
+  border-bottom: 1px solid var(--lborder-accent);
+  padding-bottom: 2px;
+  transition: gap .2s ease, border-color .2s ease;
+}
+.more-link:hover { gap: 10px; border-color: var(--primary); }
+
+/* ── 29. Focus visible — accessibility ── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+a:focus-visible, button:focus-visible { outline-offset: 4px; }
+
+/* ── 30. Selection color ── */
+::selection { background: rgba(184,154,90,0.18); color: var(--ltxt); }
+
+/* ── 31. Smooth section transitions (scroll-margin) ── */
+section[id] { scroll-margin-top: 68px; }
+
+/* ── 32. Responsive final pass ── */
+@media(max-width:1200px){
+  .section { padding: 60px 48px !important; }
+  .hero-content { padding: 0 48px !important; }
+}
+@media(max-width:900px){
+  .section { padding: 52px 24px !important; }
+  .hero-content { padding: 0 24px !important; }
+  .hero-scroll { left: 24px !important; }
+  #topbar { padding: 0 20px 0 72px !important; grid-template-columns: 1fr auto !important; }
+  .topbar-date { display: none; }
+  .dash-kpi-row { grid-template-columns: repeat(3,1fr) !important; }
+  .dash-main-row { grid-template-columns: 1fr !important; }
+  .notes-layout, .contact-grid, .translator-grid { grid-template-columns: 1fr !important; }
+  footer { padding: 28px 24px !important; flex-direction: column; gap: 12px; text-align: center; }
+}
+@media(max-width:600px){
+  .dash-kpi-row { grid-template-columns: repeat(2,1fr) !important; }
+  .student-stats { gap: 20px !important; }
+  .student-divider { display: none !important; }
+}
+
 </style>
 </head>
 <body>
